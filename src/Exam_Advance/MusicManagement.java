@@ -36,13 +36,18 @@ public class MusicManagement {
                     switch (singersChoice) {
                         case 1:
                             // Thêm mới ca sĩ
-                            if (singerIndex < singers.length) {
-                                singers[singerIndex] = new Singer();
-                                singers[singerIndex].inputData();
-                                System.out.println("Thêm mới thành công");
-                                singerIndex++;
-                            } else {
-                                System.out.println("Danh sách ca sĩ đã đầy, không thể thêm nữa.");
+                            System.out.println("nhap so ca si ban muon them");
+                            int n= Integer.parseInt(scanner.nextLine());
+                            for (int i = 0; i < n; i++) {
+                                if (singerIndex < singers.length) {
+                                    singers[singerIndex] = new Singer();
+                                    singers[singerIndex].inputData();
+                                    System.out.println("Thêm mới thành công");
+                                    singerIndex++;
+                                } else {
+                                    System.out.println("Danh sách ca sĩ đã đầy, không thể thêm nữa.");
+                                }
+
                             }
                             break;
                         case 2:
@@ -153,40 +158,38 @@ public class MusicManagement {
                     int choisenext= Integer.parseInt(scanner.nextLine());
                     switch (choisenext) {
                         case 1:
-                            System.out.print("tim kiem bai hat theo ten ca si or the loai: ");
-                            String text1 = scanner.nextLine();
+                            System.out.print("Tìm kiếm bài hát theo tên ca sĩ hoặc thể loại: ");
+                            String searchText = scanner.nextLine();
                             check = false;
                             for (int i = 0; i < singerIndex; i++) {
-                                if (singers[i].getSingerName().contains(text1) || singers[i].getGenre().contains(text1)) {
-                                    System.out.println("bai hat " + (i + 1) + ":");
+                                if (singers[i].getSingerName().contains(searchText) || singers[i].getGenre().contains(searchText)) {
+                                    System.out.println("Ca sĩ " + (i + 1) + ":");
                                     singers[i].DisplayData();
                                     check = true;
                                 }
                             }
                             if (!check) {
-                                System.out.println("Khong tim thay bai hat nao voi tu khoa " + "\'" + text1 + "\'");
+                                System.out.println("Không tìm thấy bài hát nào với từ khóa \'" + searchText + "\'");
                             }
-
                             break;
                         case 2:
-                            System.out.print("tim kiem ca si theo ten: ");
-                            String text2 = scanner.nextLine();
+                            System.out.print("Tìm kiếm ca sĩ theo tên hoặc thể loại: ");
+                            String searchName = scanner.nextLine();
                             check = false;
                             for (int j = 0; j < singerIndex; j++) {
-                                if (songs[j].getSongName().contains(text2)) {
-                                    System.out.println("ca si: " + (j + 1) + ":");
-                                    songs[j].displayData();
+                                if (singers[j].getSingerName().contains(searchName) || singers[j].getGenre().contains(searchName)) {
+                                    System.out.println("Ca sĩ " + (j + 1) + ":");
+                                    singers[j].DisplayData();
                                     check = true;
                                 }
                             }
                             if (!check) {
-                                System.out.println("Khong tim thay ca si nao voi tu khoa " + "\'" + text2 + "\'");
+                                System.out.println("Không tìm thấy ca sĩ nào với từ khóa \'" + searchName + "\'");
                             }
-
                             break;
                         case 3:
                             Arrays.sort(songs, 0, songIndex, (b1, b2) -> b1.getSongName().compareTo(b2.getSongName()));
-                            System.out.println("danh sach bai hat theo thu tu tang len dan la: ");
+                            System.out.println("Danh sách bài hát theo thứ tự tên tăng dần:");
                             for (int i = 0; i < songIndex; i++) {
                                 System.out.println(songs[i].getSongName());
                             }
@@ -195,10 +198,14 @@ public class MusicManagement {
                             for (int i = songIndex - 1, j = 0; i >= 0 && j < 10; i--, j++) {
                                 songs[i].displayData();
                             }
-                    }
                             break;
-                default:
-                    System.out.println("ket thuc.");
+                        case 5:
+                            System.out.println("Thoát");
+                            break;
+                        default:
+                            System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                    }
+                    break;
             }
         } while (choice != 4);
     }
